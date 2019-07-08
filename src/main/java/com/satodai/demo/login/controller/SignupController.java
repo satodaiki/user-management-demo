@@ -1,5 +1,6 @@
 package com.satodai.demo.login.controller;
 
+import com.satodai.demo.login.domain.model.GroupOrder;
 import com.satodai.demo.login.domain.model.SignupForm;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,7 +38,7 @@ public class SignupController {
     }
 
     @PostMapping("signup")
-    public String postSignUp(@ModelAttribute @Validated SignupForm form, BindingResult bindingResult, Model model) {
+    public String postSignUp(@ModelAttribute @Validated(GroupOrder.class) SignupForm form, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
             return getSignUp(form, model);

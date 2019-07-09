@@ -76,6 +76,20 @@
 			<artifactId>aspectjweaver</artifactId>
 		</dependency>
 
+		<!-- dao -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>5.2.0.M3</version>
+        </dependency>
+
+		<!--  -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>5.2.0.M3</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

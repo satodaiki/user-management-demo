@@ -45,6 +45,26 @@ public class LogAspect {
         }
     }
 
+
+    // 正規表現を使ってAOPの対象を指定
+    @Around("execution(* *..*.*UserDao*.*(..))")
+    public Object daoLog(ProceedingJoinPoint jp) throws Throwable {
+
+        System.out.println("daoLogメソッド開始: " + jp.getSignature());
+
+        try {
+            Object result = jp.proceed();
+
+            System.out.println("daoLogメソッド終了: " + jp.getSignature());
+
+            return result;
+        } catch(Exception e) {
+            System.out.println("daoLogメソッド異常終了: " + jp.getSignature());
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
     /**
      * すべてのコントローラのメソッド実行前にログ出力
      * @param jp

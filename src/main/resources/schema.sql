@@ -1,4 +1,6 @@
-CREATE TABLE IF NOT EXISTS employee (
+DROP TABLE IF EXISTS employee,m_user;
+
+CREATE TABLE IF NOT EXISTS public.employee (
     employee_id INT PRIMARY KEY,
     employee_name VARCHAR(50),
     age INT

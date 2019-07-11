@@ -22,7 +22,30 @@ public class UserDaoJdbcImpl implements UserDao {
 
     @Override
     public int insertOne(User user) throws DataAccessException {
-        return 0;
+
+        String sql = "";
+        sql += "INSERT INTO public.m_user(" +
+                "    user_id," +
+                "    password," +
+                "    user_name," +
+                "    birthday," +
+                "    age," +
+                "    marriage," +
+                "    role" +
+                ") VALUES (?,?,?,?,?,?,?)";
+
+        int rowNumber = jdbc.update(
+                sql,
+                user.getUserId(),
+                user.getPassword(),
+                user.getUserName(),
+                user.getBirthday(),
+                user.getAge(),
+                user.isMarriage(),
+                user.getRole()
+        );
+
+        return rowNumber;
     }
 
     @Override

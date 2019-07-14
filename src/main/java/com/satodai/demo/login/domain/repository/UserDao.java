@@ -13,7 +13,7 @@ public interface UserDao {
 
     public User selectOne(String userId) throws DataAccessException;
 
-    public List<User> selectMany(User user) throws DataAccessException;
+    public List<User> selectMany() throws DataAccessException;
 
     public int updateOne(User user) throws DataAccessException;
 

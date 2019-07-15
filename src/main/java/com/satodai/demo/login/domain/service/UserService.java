@@ -36,7 +36,7 @@ public class UserService {
     @Qualifier("UserDaoJdbcImpl")
     UserDao dao;
 
-    public boolean insert(User user) {
+    public boolean insert(User user) throws DataAccessException {
         int rowNumber = dao.insertOne(user);
 
         boolean result = false;
@@ -48,19 +48,19 @@ public class UserService {
         return result;
     }
 
-    public int count() {
+    public int count() throws DataAccessException {
         return dao.count();
     }
 
-    public List<User> selectMany() {
+    public List<User> selectMany() throws DataAccessException {
         return dao.selectMany();
     }
 
-    public User selectOne(String userId) {
+    public User selectOne(String userId) throws DataAccessException {
         return dao.selectOne(userId);
     }
 
-    public boolean updateOne(User user) {
+    public boolean updateOne(User user) throws DataAccessException {
         int rowNumber = dao.updateOne(user);
 
         boolean result = false;
@@ -72,7 +72,7 @@ public class UserService {
         return result;
     }
 
-    public boolean deleteOne(String userId) {
+    public boolean deleteOne(String userId) throws DataAccessException {
         int rowNumber = dao.deleteOne(userId);
 
         boolean result = false;

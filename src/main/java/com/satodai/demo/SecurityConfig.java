@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
 
@@ -76,6 +77,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/css/**").permitAll()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/signup").permitAll()
+                .antMatchers("/admin").hasAuthority("ROLE_ADMIN") // 認可により管理者権限以外は閲覧不可能としている
                 .anyRequest().authenticated();
 
         // ログイン処理
@@ -88,8 +90,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordParameter("password") // ログインページのパスワード
                 .defaultSuccessUrl("/home",true); // ログイン成功時の遷移先
 
+        // ログアウト処理
+        http
+                .logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login");
+
         // CSRF対策を一時的に無効
-        http.csrf().disable();
+        // http.csrf().disable();
     }
 
     /**

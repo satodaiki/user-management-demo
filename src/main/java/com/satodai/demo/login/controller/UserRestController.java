@@ -44,5 +44,31 @@ public class UserRestController {
         return str;
     }
 
+    @PutMapping("/rest/update")
+    public String putUserOne(@RequestBody User user) {
 
+        boolean result = restService.update(user);
+
+        String str = "";
+
+        if (result) {
+            str = "{\"result\":\"ok\"}";
+        } else {
+            str = "{\"result\":\"error\"}";
+        }
+
+        return str;
+    }
+
+    @DeleteMapping("/rest/delete/{id:.+}")
+    public String deleteUserOne(@PathVariable("id") String userId) {
+
+        boolean result = restService.delete(userId);
+
+        if (result) {
+            return "{\"result\":\"ok\"}";
+        } else {
+            return "{\"result\":\"error\"}";
+        }
+    }
 }

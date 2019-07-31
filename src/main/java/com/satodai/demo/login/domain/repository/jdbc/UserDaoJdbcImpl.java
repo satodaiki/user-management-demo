@@ -141,7 +141,7 @@ public class UserDaoJdbcImpl implements UserDao {
 
         int rowNumber = jdbc.update(sql, userId);
 
-        return 0;
+        return rowNumber;
     }
 
     @Override

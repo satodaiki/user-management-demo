@@ -1,0 +1,28 @@
+version: '2'
+services:
+
+  dbserver:
+    image: postgres
+    volumes:
+        - ./sql:/docker-entrypoint-initdb.d
+        - postgres-db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 38365388
+
+  app:
+    build: .
+    image: chandai/demo:0.1.0
+    depends_on:
+      - dbserver
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/app
+    environment:
+      JAR_TARGET: demo-0.0.1-SNAPSHOT.jar
+
+volumes:
+  postgres-db:
+    driver: local
